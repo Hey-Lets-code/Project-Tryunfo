@@ -30,7 +30,7 @@ class Card extends React.Component {
         <span data-testid="rare-card">{ cardRare }</span>
         {cardTrunfo && (<span data-testid="trunfo-card">Super Trunfo</span>)}
       </div>
-    ); // Deborah Cristina e Arthur Debiasi me ajudaram a construir a lógica da rendereização do cardTrunfo
+    ); // Deborah Cristina e Arthur Debiasi :3 >_< me ajudaram a construir a lógica da rendereização do cardTrunfo
   }
 }
 
