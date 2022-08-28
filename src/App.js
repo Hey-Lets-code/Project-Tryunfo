@@ -3,16 +3,24 @@ import Form from './components/Form';
 import Card from './components/Card';
 
 class App extends React.Component {
-  state = {
-    cardName: '',
-    cardDescription: '',
-    cardAttr1: '',
-    cardAttr2: '',
-    cardAttr3: '',
-    cardImage: '',
-    cardRare: '',
-    cardTrunfo: false,
-    isSaveButtonDisabled: true };
+  constructor(props) {
+    super(props);
+    this.state = {
+      cardName: '',
+      cardDescription: '',
+      cardAttr1: 0,
+      cardAttr2: 0,
+      cardAttr3: 0,
+      cardImage: '',
+      cardRare: '',
+      cardTrunfo: false,
+      isSaveButtonDisabled: true };
+    this.baseState = this.state;
+  }
+
+  resetForm = () => {
+    this.setState(this.baseState);
+  };
 
   onInputChange = ({ target }) => {
     const { name } = target;
@@ -89,7 +97,7 @@ class App extends React.Component {
           cardTrunfo={ cardTrunfo }
           onInputChange={ this.onInputChange }
           isSaveButtonDisabled={ isSaveButtonDisabled }
-          onSaveButtonClick={ this.onSaveButtonClick }
+          onSaveButtonClick={ this.resetForm }
         />
         <Card
           cardName={ cardName }
