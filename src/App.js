@@ -17,6 +17,7 @@ class App extends React.Component {
       isSaveButtonDisabled: true,
       hasTrunfo: false,
       data: [],
+      // kawaii: [],
     };
     // this.baseState = this.state;
   }
@@ -147,7 +148,7 @@ class App extends React.Component {
   render() {
     const {
       cardName, cardDescription, cardAttr1, cardAttr2, cardAttr3, cardImage, cardRare,
-      cardTrunfo, isSaveButtonDisabled, hasTrunfo } = this.state; // o valor do state foi desestruturado
+      cardTrunfo, isSaveButtonDisabled, hasTrunfo, data } = this.state; // o valor do state foi desestruturado
     return (
       <div>
         <h1>Tryunfo</h1>
@@ -165,6 +166,17 @@ class App extends React.Component {
           isSaveButtonDisabled={ isSaveButtonDisabled }
           onSaveButtonClick={ this.resetForm }
         />
+        {data.map((element) => (<Card
+          key={ element.cardName }
+          cardName={ element.cardName }
+          cardDescription={ element.cardDescription }
+          cardAttr1={ element.cardAttr1 }
+          cardAttr2={ element.cardAttr2 }
+          cardAttr3={ element.cardAttr3 }
+          cardImage={ element.cardImage }
+          cardRare={ element.cardRare }
+          cardTrunfo={ element.cardTrunfo }
+        />))}
         <Card
           cardName={ cardName }
           cardDescription={ cardDescription }
