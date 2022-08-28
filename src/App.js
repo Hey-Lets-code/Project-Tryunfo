@@ -8,19 +8,84 @@ class App extends React.Component {
     this.state = {
       cardName: '',
       cardDescription: '',
-      cardAttr1: 0,
-      cardAttr2: 0,
-      cardAttr3: 0,
+      cardAttr1: '0',
+      cardAttr2: '0',
+      cardAttr3: '0',
       cardImage: '',
       cardRare: '',
       cardTrunfo: false,
-      isSaveButtonDisabled: true };
-    this.baseState = this.state;
+      isSaveButtonDisabled: true,
+      hasTrunfo: false,
+      data: [],
+    };
+    // this.baseState = this.state;
   }
 
-  resetForm = () => {
-    this.setState(this.baseState);
+  // resetForm = () => {
+  // const { cardName, cardDescription, cardAttr1, cardAttr2, cardAttr3,
+  // cardImage, cardRare, cardTrunfo, data } = this.state;
+  // const objetao = { cardName,
+  // cardDescription,
+  // cardAttr1,
+  // cardAttr2,
+  // cardAttr3,
+  // cardImage,
+  // cardRare,
+  // cardTrunfo };
+  // const getLocalStorage = localStorage.getItem('Cards');
+  // console.log(getLocalStorage);
+  // localStorage.setItem('Cards', [...getLocalStorage, objetao]);
+  // this.state(this.baseState);
+  // };
+  componentDidMount() {
+    const cards = JSON.parse(localStorage.getItem('Cards'));
+    if (cards) {
+      this.setState({ data: cards });
+    }
+  }
+
+  componentDidUpdate() {
+    this.settingLocalStorage();
+  }
+
+  settingLocalStorage = () => {
+    const { data } = this.state;
+    // if (data.length !== 0) {
+    localStorage.setItem('Cards', JSON.stringify(data));
+    // JSON.parse(localStorage.getItem('Cards'));
+    // }
+    // console.log(data);
   };
+
+  resetForm = () => {
+    const { cardName, cardDescription, cardAttr1, cardAttr2, cardAttr3,
+      cardImage, cardRare, cardTrunfo, hasTrunfo } = this.state;
+    const objetao = { cardName,
+      cardDescription,
+      cardAttr1,
+      cardAttr2,
+      cardAttr3,
+      cardImage,
+      cardRare,
+      cardTrunfo };
+    this.setState((estado) => ({
+      data: [...estado.data, objetao], // estado.data é o valor anterior
+      cardName: '',
+      cardDescription: '',
+      cardAttr1: '0',
+      cardAttr2: '0',
+      cardAttr3: '0',
+      cardImage: '',
+      cardRare: '',
+      cardTrunfo: false,
+      hasTrunfo: hasTrunfo ? true : cardTrunfo,
+    }));
+  };
+
+  // verifyTrunfo = (() => {
+  // const { hasTrunfo } = this.state;
+  // const
+  // });
 
   onInputChange = ({ target }) => {
     const { name } = target;
@@ -82,7 +147,7 @@ class App extends React.Component {
   render() {
     const {
       cardName, cardDescription, cardAttr1, cardAttr2, cardAttr3, cardImage, cardRare,
-      cardTrunfo, isSaveButtonDisabled } = this.state; // o valor do state foi desestruturado
+      cardTrunfo, isSaveButtonDisabled, hasTrunfo } = this.state; // o valor do state foi desestruturado
     return (
       <div>
         <h1>Tryunfo</h1>
@@ -95,6 +160,7 @@ class App extends React.Component {
           cardImage={ cardImage }
           cardRare={ cardRare }
           cardTrunfo={ cardTrunfo }
+          hasTrunfo={ hasTrunfo }
           onInputChange={ this.onInputChange }
           isSaveButtonDisabled={ isSaveButtonDisabled }
           onSaveButtonClick={ this.resetForm }
