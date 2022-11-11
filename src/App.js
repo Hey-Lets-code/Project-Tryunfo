@@ -83,11 +83,6 @@ class App extends React.Component {
     }));
   };
 
-  // verifyTrunfo = (() => {
-  // const { hasTrunfo } = this.state;
-  // const
-  // });
-
   onInputChange = ({ target }) => {
     const { name } = target;
     const value = target.type === 'checkbox' ? target.checked : target.value;
@@ -104,8 +99,12 @@ class App extends React.Component {
     const MAX_LENGTH = 90;
     const ZERO = 0;
 
-    const { cardName, cardDescription, cardAttr1, cardAttr2,
-      cardAttr3, cardImage } = this.state;
+    const { cardName,
+      cardDescription,
+      cardAttr1,
+      cardAttr2,
+      cardAttr3,
+      cardImage } = this.state;
 
     const validateForString = cardName.length > 0
       && cardDescription.length > 0
@@ -119,17 +118,13 @@ class App extends React.Component {
 
     const validateSum = sumOfAttributes <= MAX_SUM;
 
-    const verifyInputCardAttrOneLessMax = Number(cardAttr1) <= MAX_LENGTH;
-
     const verifyInputCardAttrOneLessMin = Number(cardAttr1) >= ZERO;
-
-    const verifyInputCardAttrTwoLessMax = Number(cardAttr2) <= MAX_LENGTH;
-
     const verifyInputCardAttrTwoLessMin = Number(cardAttr2) >= ZERO;
-
-    const verifyInputCardAttrThreeLessMax = Number(cardAttr3) <= MAX_LENGTH;
-
     const verifyInputCardAttrThreeLessMin = Number(cardAttr3) >= ZERO;
+
+    const verifyInputCardAttrOneLessMax = Number(cardAttr1) <= MAX_LENGTH;
+    const verifyInputCardAttrTwoLessMax = Number(cardAttr2) <= MAX_LENGTH;
+    const verifyInputCardAttrThreeLessMax = Number(cardAttr3) <= MAX_LENGTH;
 
     const verifyAllCardAtrributes = verifyInputCardAttrOneLessMax
     && verifyInputCardAttrTwoLessMax
@@ -147,8 +142,16 @@ class App extends React.Component {
 
   render() {
     const {
-      cardName, cardDescription, cardAttr1, cardAttr2, cardAttr3, cardImage, cardRare,
-      cardTrunfo, isSaveButtonDisabled, hasTrunfo, data } = this.state; // o valor do state foi desestruturado
+      cardName,
+      cardDescription,
+      cardAttr1, cardAttr2,
+      cardAttr3,
+      cardImage,
+      cardRare,
+      cardTrunfo,
+      isSaveButtonDisabled,
+      hasTrunfo,
+      data } = this.state; // o valor do state foi desestruturado
     return (
       <div>
         <h1>Tryunfo</h1>
@@ -191,5 +194,20 @@ class App extends React.Component {
     );
   }
 }
+// Carolina Lima, Raphael Pacheco e Thay Quintanilha me ajudaram a construir a lógica do hasTrunfo
+// Italo Lacerda ajudou na lógica do reset Button
 // Arthur Debiasi me ajudou a construir dinamicamente a lógica do onInputChange
 export default App;
+
+/*
+      <div>
+          <button
+            type="button"
+            data-testid="delete-button"
+            disabled={ isSaveButtonDisabled }
+            onClick={ onSaveButtonClick }
+          >
+            Excluir
+          </button>
+        </div>
+ */

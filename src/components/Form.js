@@ -134,6 +134,12 @@ class Form extends React.Component {
           >
             Salvar
           </button>
+          {/* <button */}
+          {/* type="button" */}
+          {/* data-testid="delete-button" */}
+          {/* > */}
+          {/* Excluir */}
+          {/* </button> */}
         </div>
       </form>
     );
